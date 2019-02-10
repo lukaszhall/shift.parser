@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'net.ltgt.apt' version '0.10'
+    id 'io.franzbecker.gradle-lombok' version '2.0'
+}
+
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+lombok {
+    version = '1.18.4'
+    sha256 = ""
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'commons-cli:commons-cli:1.5-SNAPSHOT'
+    compile 'org.jsoup:jsoup:1.11.3'
+
+    compileOnly 'org.projectlombok:lombok:1.18.4'
+    apt 'org.projectlombok:lombok:1.18.4'
+}
