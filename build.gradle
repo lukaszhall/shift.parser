@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
     id 'net.ltgt.apt' version '0.10'
     id 'io.franzbecker.gradle-lombok' version '2.0'
 }
@@ -19,9 +20,65 @@ lombok {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile 'commons-cli:commons-cli:1.5-SNAPSHOT'
+    compile 'commons-cli:commons-cli:1.4'
     compile 'org.jsoup:jsoup:1.11.3'
 
     compileOnly 'org.projectlombok:lombok:1.18.4'
-    apt 'org.projectlombok:lombok:1.18.4'
+    //apt 'org.projectlombok:lombok:1.18.4'
+
+    // https://mvnrepository.com/artifact/com.github.peichhorn/lombok-pg
+    //compile group: 'com.github.peichhorn', name: 'lombok-pg', version: '0.11.3'
+
+    // https://mvnrepository.com/artifact/com.google.inject/guice
+    compile group: 'com.google.inject', name: 'guice', version: '4.0'
+
+    // https://mvnrepository.com/artifact/info.picocli/picocli
+    compile group: 'info.picocli', name: 'picocli', version: '3.9.3'
+
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+
+    compile 'com.google.code.gson:gson:2.8.5'
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.2'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
+
+    // https://mvnrepository.com/artifact/org.mockito/mockito-core
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.1.0'
+
 }
+
+
+mainClassName = 'com.shift.onprem.Cli'
+
+
+jar {
+    manifest {
+        attributes "Main-Class": "com.shift.onprem.Cli"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+//
+//sourceSets {
+//    test {
+//        java {
+//            srcDirs = ["."]
+//        }
+//
+//    }
+//    main {
+//        java {
+//            srcDirs = ["."]
+//        }
+//        resources {
+//            srcDirs = ["."]
+//            include 'log4j.properties'
+//        }
+//    }
+//}
+
+//war.from('src/main/resources'){ include('log4j.properties')}
